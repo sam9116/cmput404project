@@ -26,7 +26,7 @@ class authorSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = author
-        fields = ('url', 'username', 'first_name', 'last_name', 'email', 'host','github','bio')
+        fields = ('url', 'username', 'first_name', 'last_name', 'email','profilepic', 'host','github','bio')
 
 
 
@@ -39,7 +39,7 @@ class categorySerializer(serializers.ModelSerializer):
 #http://stackoverflow.com/questions/17280007/retrieving-a-foreign-key-value-with-django-rest-framework-serializers
 class commentSerializer(serializers.ModelSerializer):
     authorid = serializers.RelatedField(source='author')
-    postid = serializers.RelatedField(source='posts')
+    postid = serializers.RelatedField(source='post')
     contentType = serializers.ChoiceField(choices=model.contentchoices)
     class Meta:
         model = comment
@@ -51,13 +51,13 @@ class commentSerializer(serializers.ModelSerializer):
 class postSerializer(serializers.ModelSerializer):
     authorid = serializers.RelatedField(source='author', )
     contentType = serializers.ChoiceField(choices=model.contentchoices)
-    visibility = serializers.ChoiceField(choices=posts.vischoices)
+    visibility = serializers.ChoiceField(choices=post.vischoices)
     categories = categorySerializer(many=True)
     comments = commentSerializer(many=True)
     visibleTo = authorSerializer(many=True)
 
     class Meta:
-        model = posts
+        model = post
 
         fields = {'title','source','origin','source','descriptions','contentType','visibility','authorid','categories','comments','published','visibleTo','unlisted'}
 
@@ -67,5 +67,5 @@ class friendSerializer(serializers.ModelSerializer):
     authors = authorSerializer(many=True)
     
     class Meta:
-        model = posts
+        model = friend
         fields ={'authors'}

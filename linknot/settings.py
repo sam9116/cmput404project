@@ -26,7 +26,7 @@ SECRET_KEY = '51e60bcb-111d-43b4-9a44-999b6ad55b2d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['cmput404project.azurewebsites.net','localhost']
+ALLOWED_HOSTS = ['cmput404project.azurewebsites.net','localhost','127.0.0.1']
 
 
 # Application definition
@@ -125,3 +125,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
+
+MEDIA_ROOT = '/upload/'

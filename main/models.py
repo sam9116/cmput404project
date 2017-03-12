@@ -15,14 +15,14 @@ text_markdown = "text/markdown"
 text_plain = "text/plain"
 binary = "application/base64"
 png = "image/png;base64"
-jpeg = "image/jpeg;base64 "
+jpeg = "image/jpeg;base64"
 
 contentchoices = (
-        (text_markdown, 'Public'),
-        (text_plain, 'Friend of a Friend'),
-        (binary,'Friends only'),
-        (png, 'Private'),
-        (jpeg, 'Server Only'),
+        (text_markdown, 'text/markdown'),
+        (text_plain, 'text/plain'),
+        (binary,'application/base64'),
+        (png, 'image/png;base64'),
+        (jpeg, 'image/jpeg;base64'),
 
     )
 
@@ -30,6 +30,7 @@ contentchoices = (
 class author(models.Model):
     #https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone
     user = models.OneToOneField(User)
+    profilepic = models.ImageField(verbose_name="Images",upload_to="upload",null=True,blank=True)
     host = models.CharField(max_length=200)
     url = models.URLField(max_length=400)
     github = models.URLField(max_length=400)
@@ -53,7 +54,7 @@ class comment(models.Model):
     #https://docs.djangoproject.com/en/1.10/topics/db/examples/many_to_one/
     authorid= models.ForeignKey(author, on_delete=models.CASCADE)
     #http://stackoverflow.com/questions/17658641/django-says-my-model-is-not-defined
-    postid= models.ForeignKey('posts', on_delete=models.CASCADE)
+    postid= models.ForeignKey('post', on_delete=models.CASCADE)
     published = models.DateTimeField()
     content= models.BinaryField(max_length=10000)
     contentType= models.CharField(
@@ -63,7 +64,7 @@ class comment(models.Model):
     )
 
 
-class posts(models.Model):
+class post(models.Model):
     title = models.CharField(max_length=200)
     source = models.URLField(max_length=400)
     origin = models.URLField(max_length=400)
@@ -102,18 +103,18 @@ class posts(models.Model):
         default=friends,
     )
 
-    authorid = models.ForeignKey(author, on_delete=models.CASCADE)
+    authorid = models.ForeignKey(author,related_name="post_author", on_delete=models.CASCADE)
     #https://docs.djangoproject.com/en/1.10/topics/db/examples/many_to_many/
     categories = models.ManyToManyField(category)
     comments = models.ManyToManyField(comment)
     published = models.DateTimeField()
-    visibleTo = models.ManyToManyField(author)
+    visibleTo = models.ManyToManyField(author,related_name="allowed_author")
     unlisted = models.BooleanField()
 
 
-class friends(models.Models):
-    authors = models.ManytoManyField(author)       
+class friend(models.Model):
+    authors = models.ManyToManyField(author)       
     def clean(self, *args, **kwargs):
        if self.auth.count() > 2:
            raise ValidationError("friends are linked in pairs, can't have more than 3 ")
-       super(friends, self).clean(*args, **kwargs)
+       super(friend, self).clean(*args, **kwargs)
