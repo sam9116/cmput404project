@@ -36,6 +36,9 @@
     <Compile Include="main\forms.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="main\linknot_services.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="main\migrations\__init__.py" />
     <Compile Include="main\models.py" />
     <Compile Include="main\tests.py" />

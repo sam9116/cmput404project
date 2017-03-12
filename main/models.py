@@ -9,49 +9,34 @@ from django.utils.translation import ugettext_lazy as _
 
 # Create your models here.
 #https://docs.python.org/2/tutorial/classes.html
+
+
+text_markdown = "text/markdown"
+text_plain = "text/plain"
+binary = "application/base64"
+png = "image/png;base64"
+jpeg = "image/jpeg;base64 "
+
+contentchoices = (
+        (text_markdown, 'Public'),
+        (text_plain, 'Friend of a Friend'),
+        (binary,'Friends only'),
+        (png, 'Private'),
+        (jpeg, 'Server Only'),
+
+    )
+
+
 class author(models.Model):
     #https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone
     user = models.OneToOneField(User)
     host = models.CharField(max_length=200)
-    displayname=models.CharField(max_length=200)
     url = models.URLField(max_length=400)
     github = models.URLField(max_length=400)
     bio = models.CharField(max_length=1000)
-    firstname = models.CharField(max_length=200)
-    lastname=models.CharField(max_length=200)
-    email = models.EmailField(max_length=254)
+
     #https://docs.djangoproject.com/en/1.10/ref/models/fields/
     #http://stackoverflow.com/questions/1110153/what-is-the-most-efficent-way-to-store-a-list-in-the-django-models
-
-
-   
-    def __init__(self,host,displayname,github,bio,firstname,lastname):
-        self.host=host
-        self.displayname=display
-        self.url=self.url+'/author/'+self.id()
-        self.github=github
-        self.bio = bio
-        self.firstname = firstname
-        self.save()
-
-
-    def update_displayname(self,newname):
-        self.displayname = newname
-        self.save()
-
-    def update_github(self,newgithub):
-        self.displayname = newgithub
-        self.save()
-
-    def update_bio(self,bio):
-        self.bio = bio
-        self.save()
-    def update_fname(self,fname):
-        self.firstname=fname
-        self.save()
-    def update_lname(self,lname):
-        self.lastname
-        self.save()
 
 
 
@@ -59,11 +44,8 @@ class author(models.Model):
 
 
 class category(models.Model):
-    categoryname=models.CharField(max_length=200)
-    def __init__ (self,categorytext):
-        categoryname.unique=True;
-        self.categoryname=categorytext
-        self.save()
+    categoryname=models.CharField(max_length=200,unique=True)
+
         
 
 
@@ -74,7 +56,11 @@ class comment(models.Model):
     postid= models.ForeignKey('posts', on_delete=models.CASCADE)
     published = models.DateTimeField()
     content= models.CharField(max_length=200)
-
+    contentType= models.CharField(
+        max_length=50,
+        choices=contentchoices,
+        default=text_plain,
+    )
 
 
 class posts(models.Model):
@@ -82,7 +68,12 @@ class posts(models.Model):
     source = models.URLField(max_length=400)
     origin = models.URLField(max_length=400)
     description = models.CharField(max_length=1000)
-    contentType = models.CharField(max_length=200)
+    contentType = models.CharField(
+        max_length=50,
+        choices=contentchoices,
+        default=text_plain,
+    )
+
     content = models.BinaryField(max_length=10000)
     # securitylevel
     # 5 another user with author_id can read it
@@ -91,7 +82,6 @@ class posts(models.Model):
     # 2 only friends on my host can read it
     # 1 everyone can read it
     #https://docs.djangoproject.com/en/1.10/ref/models/fields/
-    ["PUBLIC","FOAF","FRIENDS","PRIVATE","SERVERONLY"]
     pub = "PUBLIC"
     foaf = "FOAF"
     friends = "FRIENDS"
@@ -107,7 +97,7 @@ class posts(models.Model):
 
     )
     visibility = models.CharField(
-        max_length=2,
+        max_length=50,
         choices=vischoices,
         default=friends,
     )
@@ -120,20 +110,6 @@ class posts(models.Model):
     visibleTo = models.ManyToManyField(author)
     unlisted = models.BooleanField()
 
-    def clean(self):
-       if self.visibility < 1:
-           raise ValidationError(_("you can't hide anything from yourself"))
-       elif self.visibility >6:
-           raise ValidationError(_("you just crying for attention are you?"))
 
-    def __init__(self):
-        self.title = ''
-        self.source = ''
-        self.origin = ''
-        self.description = ''
-        self.contentType=''
-        self.securitylevel=''
-
-class friends(object):
-    def __init__(self):
-        self.auth1 = ''        
+class friends(models.Models):
+    auth = models.ManytoManyField(author)       

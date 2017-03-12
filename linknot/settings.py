@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['cmput404project.azurewebsites.net','localhost']
 INSTALLED_APPS = [
     # Add your apps here to enable them
     'main',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
