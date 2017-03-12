@@ -1,0 +1,45 @@
+﻿{% extends "linknot_layout.html" %}
+
+{% block content %}
+<div class="flex-grid">
+
+    <div class="row">
+                    <div class="cell colspan4"> </div>
+                    <div class="cell colspan4">
+                        <br/><br/>
+                        <div class="input-control textarea full-size " data-text-auto-resize="true" >
+                        <textarea rows="4"></textarea>
+                        </div>
+                        
+                        <form name="postform">
+                        	<div class="input-control selec">
+                        
+                        		<select>
+                        		<option name= "public">public</option>
+                        		<option name= "only friends">only friends</option>
+                        		<option name= "only me">only me</option>
+                        
+                        		</select>
+                        	</div>
+                        
+                        	<input type="submit" name="submit_post" value="Post">
+                        
+                        </form>
+                    </div>
+                    <div class="cell colspan4"> </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+{% endblock %}

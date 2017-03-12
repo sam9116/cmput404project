@@ -1,0 +1,9 @@
+c:\users\sam\documents\visual studio 2015\Projects\linknot\linknot\bin\Microsoft.PythonTools.WebRole.dll
+c:\users\sam\documents\visual studio 2015\Projects\linknot\linknot\bin\AzureSetup.cfg
+c:\users\sam\documents\visual studio 2015\Projects\linknot\linknot\bin\Microsoft.PythonTools.AzureSetup.exe
+c:\users\sam\documents\visual studio 2015\Projects\linknot\linknot\bin\Microsoft.PythonTools.AzureSetup.exe.config
+c:\users\sam\documents\visual studio 2015\Projects\linknot\linknot\bin\wfastcgi.py
+c:\users\sam\documents\visual studio 2015\Projects\linknot\linknot\obj\Release\deployment-updated-orig-prefix.txt
+c:\users\sam\documents\visual studio 2015\Projects\linknot\linknot\ptvs_virtualenv_proxy.py
+c:\users\sam\documents\visual studio 2015\Projects\linknot\linknot\obj\Release\web.debug.config
+c:\users\sam\documents\visual studio 2015\Projects\linknot\linknot\obj\Release\web.config

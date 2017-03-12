@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Login</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'linknot_contents\css\metro.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'linknot_contents\css\metro-icons.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'linknot_contents\css\metro-responsive.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'linknot_contents\css\metro-schemes.css' %}" />
+
+</head>
+<body>
+    <div class="login-form padding20 block-shadow" style="transition:0.5s; opacity: 1; transform: scale(1);">
+        <form action="/login/" method="post">
+            {% csrf_token %}
+            <h1 class="text-light">Login to linknot</h1>
+            <hr class="thin">
+            <br>
+            <div class="input-control text full-size" data-role="input">
+                <label for="user_login">Username:</label>
+                <input name="username" id="user_login" style="padding-right: 42px;" type="text">
+                <button tabindex="-1" class="button helper-button clear" type="button"><span class="mif-cross"></span></button>
+            </div>
+            <br>
+            <br>
+            <div class="input-control password full-size" data-role="input">
+                <label for="user_password">User password:</label>
+                <input name="password" id="user_password" style="padding-right: 42px;" type="password">
+                <button tabindex="-1" class="button helper-button reveal" type="button"><span class="mif-looks"></span></button>
+            </div>
+            <br>
+            <br>
+            <div class="form-actions">
+                <button class="button primary" type="submit">Login to...</button>
+                <button class="button link" type="button">Cancel</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

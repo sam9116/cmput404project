@@ -1,0 +1,14 @@
+c:\users\sam\documents\visual studio 2015\Projects\linknot\linknot\bin\Microsoft.PythonTools.WebRole.dll
+c:\users\sam\documents\visual studio 2015\Projects\linknot\linknot\obj\Debug\attach_server.py
+c:\users\sam\documents\visual studio 2015\Projects\linknot\linknot\obj\Debug\visualstudio_py_debugger.py
+c:\users\sam\documents\visual studio 2015\Projects\linknot\linknot\obj\Debug\visualstudio_py_repl.py
+c:\users\sam\documents\visual studio 2015\Projects\linknot\linknot\obj\Debug\visualstudio_py_util.py
+c:\users\sam\documents\visual studio 2015\Projects\linknot\linknot\obj\Debug\__init__.py
+c:\users\sam\documents\visual studio 2015\Projects\linknot\linknot\obj\Debug\__main__.py
+c:\users\sam\documents\visual studio 2015\Projects\linknot\linknot\bin\AzureSetup.cfg
+c:\users\sam\documents\visual studio 2015\Projects\linknot\linknot\bin\Microsoft.PythonTools.AzureSetup.exe
+c:\users\sam\documents\visual studio 2015\Projects\linknot\linknot\bin\Microsoft.PythonTools.AzureSetup.exe.config
+c:\users\sam\documents\visual studio 2015\Projects\linknot\linknot\bin\wfastcgi.py
+c:\users\sam\documents\visual studio 2015\Projects\linknot\linknot\obj\Debug\deployment-updated-orig-prefix.txt
+c:\users\sam\documents\visual studio 2015\Projects\linknot\linknot\ptvs_virtualenv_proxy.py
+c:\users\sam\documents\visual studio 2015\Projects\linknot\linknot\obj\Debug\web.debug.config
