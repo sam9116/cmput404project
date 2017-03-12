@@ -31,10 +31,10 @@ class author(models.Model):
     #https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone
     user = models.OneToOneField(User)
     profilepic = models.ImageField(verbose_name="Images",upload_to="upload",null=True,blank=True)
-    host = models.CharField(max_length=200)
-    url = models.URLField(max_length=400)
-    github = models.URLField(max_length=400)
-    bio = models.CharField(max_length=1000)
+    host = models.CharField(max_length=200,null=True, blank=True)
+    url = models.URLField(max_length=400,null=True, blank=True)
+    github = models.URLField(max_length=400,null=True, blank=True)
+    bio = models.CharField(max_length=1000,null=True, blank=True)
 
     #https://docs.djangoproject.com/en/1.10/ref/models/fields/
     #http://stackoverflow.com/questions/1110153/what-is-the-most-efficent-way-to-store-a-list-in-the-django-models
