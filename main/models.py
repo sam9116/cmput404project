@@ -55,7 +55,7 @@ class comment(models.Model):
     #http://stackoverflow.com/questions/17658641/django-says-my-model-is-not-defined
     postid= models.ForeignKey('posts', on_delete=models.CASCADE)
     published = models.DateTimeField()
-    content= models.CharField(max_length=200)
+    content= models.BinaryField(max_length=10000)
     contentType= models.CharField(
         max_length=50,
         choices=contentchoices,
@@ -102,7 +102,7 @@ class posts(models.Model):
         default=friends,
     )
 
-    authorid = models.UUIDField(max_length=400)
+    authorid = models.ForeignKey(author, on_delete=models.CASCADE)
     #https://docs.djangoproject.com/en/1.10/topics/db/examples/many_to_many/
     categories = models.ManyToManyField(category)
     comments = models.ManyToManyField(comment)
@@ -112,4 +112,8 @@ class posts(models.Model):
 
 
 class friends(models.Models):
-    auth = models.ManytoManyField(author)       
+    authors = models.ManytoManyField(author)       
+    def clean(self, *args, **kwargs):
+       if self.auth.count() > 2:
+           raise ValidationError("friends are linked in pairs, can't have more than 3 ")
+       super(friends, self).clean(*args, **kwargs)

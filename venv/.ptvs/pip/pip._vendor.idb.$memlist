@@ -7,7 +7,7 @@ cachecontrol
 VendorAlias
 ipaddress
 six
-sys
+distlib
 absolute_import
 html5lib
 glob
@@ -15,5 +15,5 @@ _markerlib
 os
 lockfile
 packaging
-distlib
+sys
 WHEEL_DIR

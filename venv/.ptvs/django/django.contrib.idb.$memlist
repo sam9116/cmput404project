@@ -1,11 +1,11 @@
-admindocs
+flatpages
 messages
-syndication
+admindocs
 sitemaps
 sites
 admin
 staticfiles
-flatpages
+syndication
 auth
 humanize
 contenttypes
