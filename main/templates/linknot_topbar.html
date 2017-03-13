@@ -1,0 +1,19 @@
+﻿<header class="app-bar fixed-top navy" data-role="appbar">
+<div class="container">
+    {% if not request.user.is_authenticated %}
+    <a class="app-bar-element branding" href="/">Linknot</a>
+
+    {% else %}
+    <a class="app-bar-element branding" href="/">Welcome: {{username}}!</a>
+                    <span class="app-bar-divider"></span>
+            <div class="app-bar-element place-right">
+                    <a class="fg-white" href="/logout"><span class="mif-switch"></span> Log Out</a>
+
+                </div>
+    {% endif %}
+
+
+
+
+</div>
+</header>

@@ -41,6 +41,9 @@
     </Compile>
     <Compile Include="main\migrations\__init__.py" />
     <Compile Include="main\models.py" />
+    <Compile Include="main\linknot_security.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="main\tests.py" />
     <Compile Include="main\views.py" />
     <Compile Include="main\__init__.py" />
@@ -53,7 +56,9 @@
   <ItemGroup>
     <Content Include="handler.fcgi" />
     <None Include="cmput404project - Web Deploy.pubxml" />
+    <Content Include="main\templates\linknot_create_post.html" />
     <Content Include="main\templates\index.html" />
+    <Content Include="main\templates\linknot_feed.html" />
     <Content Include="main\templates\linknot_home.html" />
     <Content Include="main\templates\linknot_layout.html" />
     <Content Include="main\templates\login.html" />

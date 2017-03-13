@@ -38,21 +38,25 @@ urlpatterns = [
 
 
 
-    url(r'^author/posts',main.views.myposts,name="myposts"),
-    url(r'^author/(?P<author_id>[^/]+)/posts',main.views.author,name="somebody's post"),
-    url(r'^author/(?P<author_id>[^/]+)/friends/(?P<author_id1>[^/]+)',main.views.authorcheckfriend,name="check friends"),
-    url(r'^author/(?P<author_id>[^/]+)/friends',main.views.rtheymyfriends,name="check my friends"),
+    #url(r'^author/posts',main.views.postViewSet.myposts,name="myposts"),
+    #url(r'^author/(?P<author_id>[^/]+)/posts',main.views.author,name="somebody's post"),
+    url(r'^author/(?P<pk1>[0-9a-f-]+)/friends/(?P<pk2>[0-9a-f-]+)',main.views.friends.as_view(),name="check friends"),
+    
+    
+    
+    
+    
+    
+    url(r'^author/(?P<pk>[0-9a-f-]+)/friends$',main.views.friendlist.as_view(),name="my friends"),
 
 
 
 
+    url(r'^posts/$',main.views.Listposts.as_view(),name="myposts"),
+    url(r'^posts/(?P<pk>[0-9a-f-]+)/$',main.views.singlepost.as_view(),name="singlepost"),
+    #url(r'^posts/(?P<post_id>[^/]+)/comment',main.views.comments,name="commentsection"),
 
-
-    url(r'^posts',main.views.publicposts,name="myposts"),
-    url(r'^posts/(?P<post_id>[^/]+)',main.views.singlepost,name="singlepost"),
-    url(r'^posts/(?P<post_id>[^/]+)/comment',main.views.comments,name="commentsection"),
-
-    url(r'^friendrequest',main.views.friendrequest,name="make friends"),
+    #url(r'^friendrequest',main.views.friendrequest,name="make friends"),
 
 
 

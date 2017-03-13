@@ -12,60 +12,74 @@ from .models import *
     bio = models.CharField(max_length=1000)
 
  """
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = User
-        fields = ('url', 'username', 'first_name', 'last_name', 'email')
+#class UserSerializer(serializers.HyperlinkedModelSerializer):
+#    class Meta:
+#        model = User
+#        fields = ('url', 'username', 'first_name', 'last_name', 'email',)
 
-class authorSerializer(serializers.HyperlinkedModelSerializer):
-    url = serializers.CharField(source='user.url')
-    username = serializers.CharField(source='user.username')
-    first_name = serializers.CharField(source='user.first_name')
-    last_name = serializers.CharField(source='user.last_name')
-    email = serializers.CharField(source='user.email')
 
+#class authorSerializer(serializers.HyperlinkedModelSerializer):
+
+
+
+class authorSerializer(serializers.ModelSerializer):
+    id = serializers.UUIDField(source='authorid')
+    
     class Meta:
         model = author
-        fields = ('url', 'username', 'first_name', 'last_name', 'email','profilepic', 'host','github','bio')
-
-
+        fields = ('id','url','host','displayName','github',)
 
 class categorySerializer(serializers.ModelSerializer):
+
     class Meta:
         model = category
-        fields = {'categoryname'}
+        fields = ('categoryname',)
+
+
+
+
 
 
 #http://stackoverflow.com/questions/17280007/retrieving-a-foreign-key-value-with-django-rest-framework-serializers
 class commentSerializer(serializers.ModelSerializer):
-    authorid = serializers.RelatedField(source='author')
-    postid = serializers.RelatedField(source='post')
-    contentType = serializers.ChoiceField(choices=model.contentchoices)
+    author = authorSerializer(source='author.authorid',read_only=True)
+    postid = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
+
+
+    contentType = serializers.ChoiceField(choices=contentchoices)
     class Meta:
         model = comment
-        fields = ('authorid', 'postid', 'published','content','contentType')
+        fields = ('author', 'postid', 'published','content','commentid','contentType',)
 
 
 #http://stackoverflow.com/questions/37828358/manytomany-with-django-rest-framework
 
+
 class postSerializer(serializers.ModelSerializer):
-    authorid = serializers.RelatedField(source='author', )
-    contentType = serializers.ChoiceField(choices=model.contentchoices)
+    author = authorSerializer(source='authorid',read_only=True )
+    contentType = serializers.ChoiceField(choices=contentchoices)
     visibility = serializers.ChoiceField(choices=post.vischoices)
-    categories = categorySerializer(many=True)
+    categories = serializers.SlugRelatedField(
+        many=True,
+        read_only=True,
+        slug_field='categoryname'
+     )
+
     comments = commentSerializer(many=True)
     visibleTo = authorSerializer(many=True)
 
     class Meta:
         model = post
+        fields = ('title','source','origin','source','description','contentType','content','author','categories','visibility','comments','published','postid','visibleTo','unlisted',)
 
-        fields = {'title','source','origin','source','descriptions','contentType','visibility','authorid','categories','comments','published','visibleTo','unlisted'}
+
 
 
 
 class friendSerializer(serializers.ModelSerializer):
-    authors = authorSerializer(many=True)
-    
+    author1 = serializers.URLField(source='authorid1.url',read_only=True)
+    author2 = serializers.URLField(source='authorid2.url',read_only=True)
     class Meta:
         model = friend
-        fields ={'authors'}
+        fields =('author1','author2')
+        #fields = "__all__"
